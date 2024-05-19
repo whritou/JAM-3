@@ -1,0 +1,33 @@
+.flame-container {
+    width: 100px;
+    position: relative;
+    margin: 0 auto;
+    height: 200px; /* Set a fixed height for the container */
+  }
+  
+  .flame {
+    width: 50px;
+    background: radial-gradient(circle at 50% 100%, yellow, orange, red);
+    border-radius: 50% 50% 0 0;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-100%);
+    animation: flicker 0.5s infinite;
+  }
+  
+  @keyframes flicker {
+    0%, 100% {
+      transform: translateX(-50%) scaleY(1);
+    }
+    50% {
+      transform: translateX(-50%) scaleY(0.9);
+    }
+  }
+  
+  .motivation-message {
+    color: green;
+    font-size: 1.2em;
+    margin-bottom: 1em;
+  }
+  
