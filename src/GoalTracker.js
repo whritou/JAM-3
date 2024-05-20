@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function GoalTracker({ onGoalAdd, onGoalComplete }) {
+function GoalTracker({ onGoalAdd, onGoalComplete, onSharePost }) {
   const [goals, setGoals] = useState([]);
   const [input, setInput] = useState("");
 
@@ -16,6 +16,16 @@ function GoalTracker({ onGoalAdd, onGoalComplete }) {
   const toggleGoalCompletion = (index) => {
     const newGoals = [...goals];
     newGoals[index].completed = !newGoals[index].completed;
+    setGoals(newGoals);
+    onGoalComplete(newGoals.filter(goal => goal.completed).length);
+  };
+
+  const shareGoal = (goalText) => {
+    onSharePost(goalText);
+  };
+
+  const deleteGoal = (index) => {
+    const newGoals = goals.filter((_, i) => i !== index);
     setGoals(newGoals);
     onGoalComplete(newGoals.filter(goal => goal.completed).length);
   };
@@ -39,6 +49,8 @@ function GoalTracker({ onGoalAdd, onGoalComplete }) {
               onChange={() => toggleGoalCompletion(index)}
             />
             {goal.text}
+            <button onClick={() => shareGoal(goal.text)}>Partager</button>
+            <button className="delete" onClick={() => deleteGoal(index)}>Supprimer</button>
           </li>
         ))}
       </ul>
